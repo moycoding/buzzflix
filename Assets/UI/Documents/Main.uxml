@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="Screen" class="screen" style="justify-content: space-between; flex-grow: 1;">
+        <ui:VisualElement name="Content" style="flex-grow: 1; justify-content: flex-start;" />
+        <ui:VisualElement name="NavBar" style="flex-direction: row; justify-content: space-between;">
+            <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" />
+            <ui:Button text="Next" display-tooltip-when-elided="true" name="NextButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
