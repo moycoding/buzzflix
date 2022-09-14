@@ -1,9 +1,13 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:VisualElement name="Screen" class="screen" style="justify-content: space-between; flex-grow: 1;">
-        <ui:VisualElement name="Content" style="flex-grow: 1; justify-content: flex-start;" />
-        <ui:VisualElement name="NavBar" style="flex-direction: row; justify-content: space-between;">
-            <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" />
-            <ui:Button text="Next" display-tooltip-when-elided="true" name="NextButton" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="PartySizeDatePanel" src="project://database/Assets/UI/Documents/PartySizeDatePanel.uxml?fileID=9197481963319205126&amp;guid=997e3a29e3138644883ce4b3004018a2&amp;type=3#PartySizeDatePanel" />
+    <Style src="project://database/Assets/UI/Styles/Layout.uss?fileID=7433441132597879392&amp;guid=2680b0b4f9c8c344e9bd32bd3f594a9a&amp;type=3#Layout" />
+    <ui:VisualElement name="Screen" class="screen">
+        <ui:VisualElement name="Content" class="content">
+            <ui:Instance template="PartySizeDatePanel" name="PartySizeDatePanel" />
+        </ui:VisualElement>
+        <ui:VisualElement name="NavBar" class="nav-bar">
+            <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="nav-button" />
+            <ui:Button text="Next" display-tooltip-when-elided="true" name="NextButton" class="nav-button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

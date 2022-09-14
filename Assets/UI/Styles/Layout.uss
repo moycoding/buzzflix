@@ -5,3 +5,31 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.screen {
+    justify-content: ;
+    flex-grow: 1;
+}
+
+.content {
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+.nav-bar {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-button {
+}
+
+.dropdown {
+    color: rgb(0, 0, 0);
+    background-color: rgba(76, 76, 76, 0);
+    margin-left: 0;
+}
+
+.spacer {
+    height: 15px;
+}
