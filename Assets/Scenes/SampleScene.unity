@@ -268,3 +268,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c91d8437673294f89c8f2ba60c40f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movieListEntryTemplate: {fileID: 9197481963319205126, guid: 705da46587a5e304c9d150e28797360a, type: 3}

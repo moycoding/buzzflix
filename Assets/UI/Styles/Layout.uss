@@ -36,3 +36,6 @@
 .selected-content {
     display: flex;
 }
+
+.nav-content {
+}

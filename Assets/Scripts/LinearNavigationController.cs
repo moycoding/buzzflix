@@ -29,15 +29,15 @@ public class LinearNavigationController
             m_Panels.Add(panels[i]);
         }
 
-        Debug.Log(m_Panels.Count);
-
         m_BackButton = root.Q<Button>(backButtonName);
         m_NextButton = root.Q<Button>(nextButtonName);
         m_CurrentPanelIndex = 0;
         // TODO: make this more robust
 
-        m_BackButton.clickable.clicked += () => Back();
-        m_NextButton.clickable.clicked += () => Next();
+        m_BackButton.clicked += () => Back();
+        m_NextButton.clicked += () => Next();
+        
+        UpdateButtons();
     }
 
     public void SetCurrentPanel(int index)
@@ -50,6 +50,7 @@ public class LinearNavigationController
 
         DisablePanel(prevIndex);
         EnablePanel(m_CurrentPanelIndex);
+        UpdateButtons();
     }
 
     private void Back()
@@ -66,6 +67,12 @@ public class LinearNavigationController
         {
             SetCurrentPanel(m_CurrentPanelIndex + 1);
         }
+    }
+
+    private void UpdateButtons()
+    {
+        m_BackButton.visible = m_CurrentPanelIndex > 0;
+        m_NextButton.visible = m_CurrentPanelIndex < m_Panels.Count - 1;
     }
 
     private void DisablePanel(int index)

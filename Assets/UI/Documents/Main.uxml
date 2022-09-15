@@ -3,12 +3,12 @@
     <ui:Template name="MovieAndTimePanel" src="project://database/Assets/UI/Documents/MovieAndTimePanel.uxml?fileID=9197481963319205126&amp;guid=c88c03c64f40dd8469c8e628f0e2698e&amp;type=3#MovieAndTimePanel" />
     <Style src="project://database/Assets/UI/Styles/Layout.uss?fileID=7433441132597879392&amp;guid=2680b0b4f9c8c344e9bd32bd3f594a9a&amp;type=3#Layout" />
     <ui:VisualElement name="Screen" class="screen">
-        <ui:VisualElement name="NavContent" class="content">
+        <ui:VisualElement name="NavContent" class="content nav-content">
             <ui:Instance template="PartySizeDatePanel" name="PartySizeDatePanel" class="nav-panel selected-content" />
             <ui:Instance template="MovieAndTimePanel" name="MovieAndTimePanel" class="unselected-content nav-panel" />
         </ui:VisualElement>
         <ui:VisualElement name="NavBar" class="nav-bar">
-            <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="nav-button" />
+            <ui:Button text="Back" display-tooltip-when-elided="true" name="BackButton" class="nav-button" style="display: flex; visibility: hidden;" />
             <ui:Button text="Next" display-tooltip-when-elided="true" name="NextButton" class="nav-button" />
         </ui:VisualElement>
     </ui:VisualElement>

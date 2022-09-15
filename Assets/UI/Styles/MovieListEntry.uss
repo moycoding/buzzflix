@@ -1,0 +1,24 @@
+.movie-label {
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+}
+
+.movie-container {
+    height: 69px;
+    align-items: center;
+}
+
+.movie-times {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: -2px;
+}
+
+.movie-time-button {
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
