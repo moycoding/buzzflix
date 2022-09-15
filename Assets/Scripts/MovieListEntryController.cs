@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,11 @@ public class MovieListEntryController
     private const string movieLabelName = "MovieLabel";
     private const string MovieTimeContainerName = "MovieTimes";
     private const string MovieTimeButtonClass = "movie-time-button";
+    private const string SelectedMovieTimeClass = "selected-movie-time";
 
     private Label m_MovieLabel;
     private VisualElement m_MovieTimesContainer;
+    private List<Button> m_MovieTimeButtons;
 
     public void SetVisualElement(VisualElement visualElement)
     {
@@ -18,16 +21,31 @@ public class MovieListEntryController
         m_MovieTimesContainer = visualElement.Q<VisualElement>(MovieTimeContainerName);
     }
 
-    public void SetMovieData(MovieData movieData)
+    public void SetMovieData(MovieData movieData, Action<int> onSelect)
     {
         m_MovieLabel.text = movieData.Name;
+        m_MovieTimeButtons = new();
 
         for (int i = 0; i < movieData.Times.Count; i++)
         {
             var button = new Button();
             button.text = movieData.Times[i];
             button.AddToClassList(MovieTimeButtonClass);
+
+            var index = i;
+            button.clicked += () =>
+            {
+                onSelect(index);
+                button.AddToClassList(SelectedMovieTimeClass);
+            };
+
             m_MovieTimesContainer.Add(button);
+            m_MovieTimeButtons.Add(button);
         }
+    }
+
+    public void Unselect(int index)
+    {
+        m_MovieTimeButtons[index].RemoveFromClassList(SelectedMovieTimeClass);
     }
 }

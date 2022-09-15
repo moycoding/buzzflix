@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class MovieListController
     private VisualTreeAsset m_ListEntryTemplate;
     private ListView m_ListView;
     private List<MovieData> m_MovieData;
+
+    private int m_SelectedMovieIndex = -1;
+    private int m_SelectedTimeIndex = -1;
+    private WeakReference<MovieListEntryController> m_SelectedTimeController = new(null);
 
     public MovieListController(ListView listView, VisualTreeAsset listEntryTemplate)
     {
@@ -42,9 +47,27 @@ public class MovieListController
 
         m_ListView.bindItem = (item, index) =>
         {
-            (item.userData as MovieListEntryController).SetMovieData(m_MovieData[index]);
+            var controller = item.userData as MovieListEntryController;
+            controller.SetMovieData(m_MovieData[index], (timeIndex) =>
+                {
+                    SelectMovieTime(index, timeIndex, controller);
+                }
+            );
         };
 
         m_ListView.itemsSource = m_MovieData;
+    }
+
+    private void SelectMovieTime(int movieIndex, int timeIndex, MovieListEntryController controller)
+    {
+        MovieListEntryController prevSelectionController;
+        if (m_SelectedTimeController.TryGetTarget(out prevSelectionController))
+        {
+            prevSelectionController.Unselect(m_SelectedTimeIndex);
+        }
+
+        m_SelectedTimeController.SetTarget(controller);
+        m_SelectedMovieIndex = movieIndex;
+        m_SelectedTimeIndex = timeIndex;
     }
 }

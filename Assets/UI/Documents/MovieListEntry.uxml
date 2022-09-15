@@ -3,7 +3,7 @@
     <ui:VisualElement name="Container" class="movie-container">
         <ui:Label text="Movie Meme Goes Here" display-tooltip-when-elided="true" name="MovieLabel" class="movie-label" />
         <ui:VisualElement name="MovieTimes" class="movie-times">
-            <ui:Button text="11:30" display-tooltip-when-elided="true" name="MovieTimeButton" class="movie-time-button" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); display: none;" />
+            <ui:Button text="11:30" display-tooltip-when-elided="true" name="MovieTimeButton" class="movie-time-button selected-movie-time" style="display: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
