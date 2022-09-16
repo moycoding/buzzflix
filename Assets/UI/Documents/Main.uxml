@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Template name="PartySizeDatePanel" src="project://database/Assets/UI/Documents/PartySizeDatePanel.uxml?fileID=9197481963319205126&amp;guid=997e3a29e3138644883ce4b3004018a2&amp;type=3#PartySizeDatePanel" />
+    <ui:Template name="PartySizeDatePanel" src="project://database/Assets/UI/Documents/NameDatePanel.uxml?fileID=9197481963319205126&amp;guid=997e3a29e3138644883ce4b3004018a2&amp;type=3#NameDatePanel" />
     <ui:Template name="MovieAndTimePanel" src="project://database/Assets/UI/Documents/MovieAndTimePanel.uxml?fileID=9197481963319205126&amp;guid=c88c03c64f40dd8469c8e628f0e2698e&amp;type=3#MovieAndTimePanel" />
     <ui:Template name="SeatSelectionPanel" src="project://database/Assets/UI/Documents/SeatSelectionPanel.uxml?fileID=9197481963319205126&amp;guid=6b9098b088767ab429378942132893a4&amp;type=3#SeatSelectionPanel" />
     <Style src="project://database/Assets/UI/Styles/Layout.uss?fileID=7433441132597879392&amp;guid=2680b0b4f9c8c344e9bd32bd3f594a9a&amp;type=3#Layout" />
     <ui:VisualElement name="Screen" class="screen">
         <ui:VisualElement name="NavContent" class="content nav-content">
-            <ui:Instance template="PartySizeDatePanel" name="PartySizeDatePanel" class="nav-panel selected-content" />
+            <ui:Instance template="PartySizeDatePanel" name="NameDatePanel" class="nav-panel selected-content" />
             <ui:Instance template="MovieAndTimePanel" name="MovieAndTimePanel" class="unselected-content nav-panel" />
             <ui:Instance template="SeatSelectionPanel" name="SeatSelectionPanel" class="unselected-content" />
         </ui:VisualElement>

@@ -48,7 +48,8 @@ public class MovieListController
         m_ListView.bindItem = (item, index) =>
         {
             var controller = item.userData as MovieListEntryController;
-            controller.SetMovieData(m_MovieData[index], (timeIndex) =>
+            int selectedIndex = (index == m_SelectedMovieIndex) ? m_SelectedTimeIndex : -1;
+            controller.SetMovieData(m_MovieData[index], selectedIndex, (timeIndex) =>
                 {
                     SelectMovieTime(index, timeIndex, controller);
                 }

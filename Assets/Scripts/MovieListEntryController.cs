@@ -21,16 +21,22 @@ public class MovieListEntryController
         m_MovieTimesContainer = visualElement.Q<VisualElement>(MovieTimeContainerName);
     }
 
-    public void SetMovieData(MovieData movieData, Action<int> onSelect)
+    public void SetMovieData(MovieData movieData, int selectedIndex, Action<int> onSelect)
     {
         m_MovieLabel.text = movieData.Name;
         m_MovieTimeButtons = new();
+        m_MovieTimesContainer.Clear();
 
         for (int i = 0; i < movieData.Times.Count; i++)
         {
             var button = new Button();
             button.text = movieData.Times[i];
             button.AddToClassList(MovieTimeButtonClass);
+
+            if (i == selectedIndex)
+            {
+                button.AddToClassList(SelectedMovieTimeClass);
+            }
 
             var index = i;
             button.clicked += () =>
