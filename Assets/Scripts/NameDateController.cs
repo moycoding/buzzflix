@@ -18,13 +18,15 @@ public class NameDateController
     private DropdownField m_MonthDropdown;
     private DropdownField m_DayDropdown;
 
+    private SelectionController m_SelectionController;
     private string m_ReservationName;
-    private DateTime m_SelectedDate;
     private int m_CurrentYear;
     private DateTimeFormatInfo m_DateTimeFormat;
 
-    public NameDateController(VisualElement panel)
+    public NameDateController(VisualElement panel, SelectionController selectionController)
     {
+        m_SelectionController = selectionController;
+
         m_NameField = panel.Q<TextField>(ReservationNameFieldName);
         m_YearDropdown = panel.Q<DropdownField>(DateYearDropdownName);
         m_MonthDropdown = panel.Q<DropdownField>(DateMonthDropdownName);
@@ -36,25 +38,25 @@ public class NameDateController
             m_ReservationName = evt.newValue;
         });
 
-        m_SelectedDate = DateTime.Now.Date;
-        m_CurrentYear = m_SelectedDate.Year;
+        m_SelectionController.Date = DateTime.Now.Date;
+        m_CurrentYear = m_SelectionController.Date.Year;
 
         m_DateTimeFormat = CultureInfo.CurrentUICulture.DateTimeFormat;
         PopulateDate();
 
         m_YearDropdown.RegisterCallback<ChangeEvent<string>>((evt) =>
         {
-            SelectDate(m_YearDropdown.index + m_CurrentYear, m_SelectedDate.Month, m_SelectedDate.Day);
+            SelectDate(m_YearDropdown.index + m_CurrentYear, m_SelectionController.Date.Month, m_SelectionController.Date.Day);
         });
 
         m_MonthDropdown.RegisterCallback<ChangeEvent<string>>((evt) =>
         {
-            SelectDate(m_SelectedDate.Year, m_MonthDropdown.index + 1, m_SelectedDate.Day);
+            SelectDate(m_SelectionController.Date.Year, m_MonthDropdown.index + 1, m_SelectionController.Date.Day);
         });
 
         m_DayDropdown.RegisterCallback<ChangeEvent<string>>((evt) =>
         {
-            SelectDate(m_SelectedDate.Year, m_SelectedDate.Month, m_DayDropdown.index + 1);
+            SelectDate(m_SelectionController.Date.Year, m_SelectionController.Date.Month, m_DayDropdown.index + 1);
         });
     }
 
@@ -62,7 +64,7 @@ public class NameDateController
     {
         var daysInMonth = DateTime.DaysInMonth(year, month);
         var newDay = day <= daysInMonth ? day : daysInMonth;
-        m_SelectedDate = new(year, month, newDay);
+        m_SelectionController.Date = new(year, month, newDay);
 
         PopulateDate();
     }
@@ -81,7 +83,7 @@ public class NameDateController
         yearList.Add($"{m_CurrentYear + 1}");
 
         m_YearDropdown.choices = yearList;
-        m_YearDropdown.index = m_SelectedDate.Year - m_CurrentYear;
+        m_YearDropdown.index = m_SelectionController.Date.Year - m_CurrentYear;
     }
 
     private void PopulateMonthDropdown()
@@ -93,12 +95,12 @@ public class NameDateController
         }
 
         m_MonthDropdown.choices = monthList;
-        m_MonthDropdown.index = m_SelectedDate.Month - 1;
+        m_MonthDropdown.index = m_SelectionController.Date.Month - 1;
     }
 
     private void PopulateDayDropdown()
     {
-        var days = DateTime.DaysInMonth(m_SelectedDate.Year, m_SelectedDate.Month);
+        var days = DateTime.DaysInMonth(m_SelectionController.Date.Year, m_SelectionController.Date.Month);
         var dayList = new List<string>();
         for (int day = 1; day <= days; day++)
         {
@@ -106,6 +108,6 @@ public class NameDateController
         }
 
         m_DayDropdown.choices = dayList;
-        m_DayDropdown.index = m_SelectedDate.Day - 1;
+        m_DayDropdown.index = m_SelectionController.Date.Day - 1;
     }
 }

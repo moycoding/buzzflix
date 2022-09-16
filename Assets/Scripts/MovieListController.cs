@@ -10,18 +10,26 @@ public class MovieListController
     private ListView m_ListView;
     private List<MovieData> m_MovieData;
 
-    private int m_SelectedMovieIndex = -1;
-    private int m_SelectedTimeIndex = -1;
+    private SelectionController m_SelectionController;
     private WeakReference<MovieListEntryController> m_SelectedTimeController = new(null);
 
-    public MovieListController(ListView listView, VisualTreeAsset listEntryTemplate)
+    public MovieListController(ListView listView, VisualTreeAsset listEntryTemplate, SelectionController selectionController)
     {
+        m_SelectionController = selectionController;
+
         LoadMovieData();
 
         m_ListView = listView;
         m_ListEntryTemplate = listEntryTemplate;
 
         PopulateMovieList();
+
+        selectionController.onDateChanged += (date) =>
+        {
+            SelectMovieTime(-1, -1, null);
+            LoadMovieData();
+            PopulateMovieList();
+        };
     }
 
     private void LoadMovieData()
@@ -48,7 +56,7 @@ public class MovieListController
         m_ListView.bindItem = (item, index) =>
         {
             var controller = item.userData as MovieListEntryController;
-            int selectedIndex = (index == m_SelectedMovieIndex) ? m_SelectedTimeIndex : -1;
+            int selectedIndex = (index == m_SelectionController.MovieIndex) ? m_SelectionController.TimeIndex : -1;
             controller.SetMovieData(m_MovieData[index], selectedIndex, (timeIndex) =>
                 {
                     SelectMovieTime(index, timeIndex, controller);
@@ -64,11 +72,11 @@ public class MovieListController
         MovieListEntryController prevSelectionController;
         if (m_SelectedTimeController.TryGetTarget(out prevSelectionController))
         {
-            prevSelectionController.Unselect(m_SelectedTimeIndex);
+            prevSelectionController.Unselect(m_SelectionController.TimeIndex);
         }
 
         m_SelectedTimeController.SetTarget(controller);
-        m_SelectedMovieIndex = movieIndex;
-        m_SelectedTimeIndex = timeIndex;
+        m_SelectionController.MovieIndex = movieIndex;
+        m_SelectionController.TimeIndex = timeIndex;
     }
 }

@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     private const string seatSelectionPanelName = "SeatSelectionPanel";
 
     private LinearNavigationController m_NavController;
+    private SelectionController m_SelectionController;
     private NameDateController m_NameDateController;
     private MovieListController m_MovieListController;
     private SeatSelectionController m_SeatSelectionController;
@@ -26,13 +27,15 @@ public class UIController : MonoBehaviour
         var contentContainer = root.Q<VisualElement>(navContentName);
         m_NavController = new(root, contentContainer);
 
+        m_SelectionController = new();
+
         var nameDatePanel = root.Q<VisualElement>(nameDatePanelName);
-        m_NameDateController = new(nameDatePanel);
+        m_NameDateController = new(nameDatePanel, m_SelectionController);
 
         var movieList = root.Q<ListView>(movieListName);
-        m_MovieListController = new(movieList, movieListEntryTemplate);
+        m_MovieListController = new(movieList, movieListEntryTemplate, m_SelectionController);
 
         var seatSelectionPanel = root.Q<VisualElement>(seatSelectionPanelName);
-        m_SeatSelectionController = new(seatSelectionPanel);
+        m_SeatSelectionController = new(seatSelectionPanel, m_SelectionController);
     }
 }

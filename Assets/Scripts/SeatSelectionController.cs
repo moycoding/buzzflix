@@ -16,16 +16,23 @@ public class SeatSelectionController
 
     private List<List<bool>> m_ReservedSeats;
     private List<List<Button>> m_Buttons;
-    private int m_SelectedRow = -1;
-    private int m_SelectedSeat = -1;
+    private SelectionController m_SelectionController;
 
-    public SeatSelectionController(VisualElement panel)
+    public SeatSelectionController(VisualElement panel, SelectionController selectionController)
     {
+        m_SelectionController = selectionController;
+
         LoadSeatData();
 
         m_SeatRows = panel.Q<VisualElement>(SeatRowsContainerName);
 
         PopulateView();
+
+        m_SelectionController.onTimeIndexChanged += (index) =>
+        {
+            LoadSeatData();
+            PopulateView();
+        };
     }
 
     private void LoadSeatData()
@@ -48,6 +55,7 @@ public class SeatSelectionController
     private void PopulateView()
     {
         m_Buttons = new();
+        m_SeatRows.Clear();
 
         for (int row = 0; row < m_ReservedSeats.Count; row++)
         {
@@ -84,16 +92,19 @@ public class SeatSelectionController
 
     private void SelectSeat(int row, int seat)
     {
-        if (m_SelectedRow != -1)
+        if (m_SelectionController.Row != -1)
         {
-            var prevButton = m_Buttons[m_SelectedRow][m_SelectedSeat];
+            var prevButton = m_Buttons[m_SelectionController.Row][m_SelectionController.Seat];
             prevButton.RemoveFromClassList(SelectedSeatButtonClass);
         }
 
-        m_SelectedRow = row;
-        m_SelectedSeat = seat;
+        m_SelectionController.Row = row;
+        m_SelectionController.Seat = seat;
 
-        var currButton = m_Buttons[m_SelectedRow][m_SelectedSeat];
-        currButton.AddToClassList(SelectedSeatButtonClass);
+        if (row != -1 && seat != -1)
+        {
+            var currButton = m_Buttons[m_SelectionController.Row][m_SelectionController.Seat];
+            currButton.AddToClassList(SelectedSeatButtonClass);
+        }
     }
 }

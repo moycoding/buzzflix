@@ -52,6 +52,9 @@ public class MovieListEntryController
 
     public void Unselect(int index)
     {
-        m_MovieTimeButtons[index].RemoveFromClassList(SelectedMovieTimeClass);
+        if (index >= 0 && index < m_MovieTimeButtons.Count)
+        {
+            m_MovieTimeButtons[index].RemoveFromClassList(SelectedMovieTimeClass);
+        }
     }
 }
