@@ -73,6 +73,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .seat-selection-content {
@@ -81,4 +85,8 @@
 
 .unavailable-seat {
     background-color: rgba(171, 46, 46, 255);
+}
+
+.selected-seat {
+    background-color: rgba(71, 202, 54, 255);
 }

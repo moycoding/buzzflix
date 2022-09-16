@@ -4,7 +4,7 @@
         <ui:ScrollView mode="VerticalAndHorizontal" style="align-items: center;">
             <ui:VisualElement name="SeatSelectionContent" class="seat-selection-content">
                 <ui:VisualElement name="MovieScreen" style="width: 80%; height: 18px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 2px;" />
-                <ui:VisualElement name="SeatRows" style="align-items: center; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+                <ui:VisualElement name="SeatRows" />
             </ui:VisualElement>
         </ui:ScrollView>
     </ui:VisualElement>
