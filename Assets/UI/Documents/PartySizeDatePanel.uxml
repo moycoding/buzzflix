@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/Layout.uss?fileID=7433441132597879392&amp;guid=2680b0b4f9c8c344e9bd32bd3f594a9a&amp;type=3#Layout" />
-    <ui:VisualElement name="PartySizeDatePanel" style="flex-grow: 1; align-items: center; justify-content: center; -unity-text-outline-color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">
+    <ui:VisualElement name="PartySizeDatePanel" class="panel">
         <ui:Label text="How many seats?" display-tooltip-when-elided="true" name="PartySizeLabel" style="color: rgb(255, 255, 255);" />
         <ui:DropdownField index="0" choices="1, 2, 3, 4" name="PartySizeDropdown" class="dropdown" />
         <ui:VisualElement name="Spacer" class="spacer" />

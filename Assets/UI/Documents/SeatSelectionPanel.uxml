@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/Layout.uss?fileID=7433441132597879392&amp;guid=2680b0b4f9c8c344e9bd32bd3f594a9a&amp;type=3#Layout" />
+    <ui:VisualElement name="SeatSelectionPanel" class="panel seat-button" style="width: auto; height: auto;">
+        <ui:ScrollView mode="VerticalAndHorizontal" style="align-items: center;">
+            <ui:VisualElement name="SeatSelectionContent" class="seat-selection-content">
+                <ui:VisualElement name="MovieScreen" style="width: 80%; height: 18px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 2px;" />
+                <ui:VisualElement name="SeatRows" style="align-items: center; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+            </ui:VisualElement>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

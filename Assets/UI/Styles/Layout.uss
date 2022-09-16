@@ -39,3 +39,46 @@
 
 .nav-content {
 }
+
+.panel {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: flex-start;
+    -unity-text-outline-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+}
+
+.seat-button {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.seat-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.seat-selection-content {
+    align-items: center;
+}
+
+.unavailable-seat {
+    background-color: rgba(171, 46, 46, 255);
+}

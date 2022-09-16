@@ -10,9 +10,11 @@ public class UIController : MonoBehaviour
 
     private const string navContentName = "NavContent";
     private const string movieListName = "MovieList";
+    private const string seatSelectionPanelName = "SeatSelectionPanel";
 
     private LinearNavigationController m_NavController;
     private MovieListController m_MovieListController;
+    private SeatSelectionController m_SeatSelectionController;
 
     void OnEnable()
     {
@@ -24,5 +26,8 @@ public class UIController : MonoBehaviour
 
         var movieList = root.Q<ListView>(movieListName);
         m_MovieListController = new(movieList, movieListEntryTemplate);
+
+        var seatSelectionPanel = root.Q<VisualElement>(seatSelectionPanelName);
+        m_SeatSelectionController = new(seatSelectionPanel);
     }
 }
