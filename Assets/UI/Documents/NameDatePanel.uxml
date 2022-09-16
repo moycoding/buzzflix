@@ -6,9 +6,9 @@
         <ui:VisualElement name="Spacer" class="spacer" />
         <ui:Label text="Reservation date?" display-tooltip-when-elided="true" name="DateLabel" style="color: rgb(255, 255, 255);" />
         <ui:VisualElement name="DateSelectorBar" style="flex-direction: column;">
+            <ui:DropdownField index="0" choices="2022" name="YearDropdown" class="dropdown" style="margin-left: 0;" />
             <ui:DropdownField index="0" choices="January, February, March, April, May, June, July, August, September, October, November, December" name="MonthDropdown" class="dropdown" style="margin-left: 0;" />
             <ui:DropdownField index="0" choices="1, 2, 3, 4, 5" name="DayDropdown" class="dropdown" style="margin-left: 0;" />
-            <ui:DropdownField index="0" choices="2022, 2023" name="YearDropdown" class="dropdown" style="margin-left: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

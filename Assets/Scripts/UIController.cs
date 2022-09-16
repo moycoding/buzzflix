@@ -9,10 +9,12 @@ public class UIController : MonoBehaviour
     VisualTreeAsset movieListEntryTemplate;
 
     private const string navContentName = "NavContent";
+    private const string nameDatePanelName = "NameDatePanel";
     private const string movieListName = "MovieList";
     private const string seatSelectionPanelName = "SeatSelectionPanel";
 
     private LinearNavigationController m_NavController;
+    private NameDateController m_NameDateController;
     private MovieListController m_MovieListController;
     private SeatSelectionController m_SeatSelectionController;
 
@@ -23,6 +25,9 @@ public class UIController : MonoBehaviour
 
         var contentContainer = root.Q<VisualElement>(navContentName);
         m_NavController = new(root, contentContainer);
+
+        var nameDatePanel = root.Q<VisualElement>(nameDatePanelName);
+        m_NameDateController = new(nameDatePanel);
 
         var movieList = root.Q<ListView>(movieListName);
         m_MovieListController = new(movieList, movieListEntryTemplate);
