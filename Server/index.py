@@ -38,7 +38,7 @@ def get_movies():
     output = schema.dump(
         filter(lambda t: t.date == date, movies)
     )
-    return jsonify(output)
+    return jsonify({'data': output})
 
 def toTime(timeString): 
     return time.fromisoformat(timeString)
@@ -63,13 +63,13 @@ def get_reservations():
 
     schema = ReservationsSchema()
     output = schema.dump(reservations)
-    return jsonify(output)
+    return jsonify({'data': output})
 
 @app.route('/allreservations')
 def get_all_reservations():
     schema = ReservationSchema(many=True)
     output = schema.dump(reserved_seats)
-    return jsonify(output)
+    return jsonify({'data': output})
 
     
 @app.route('/reservations', methods=['POST'])
