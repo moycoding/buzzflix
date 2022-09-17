@@ -43,33 +43,17 @@ public class SeatSelectionController
     private void LoadSeatData()
     {
         m_ReservedSeats = null;
-        Debug.Log(m_SelectionController.TimeIndex);
         if (m_SelectionController.TimeIndex != -1)
         {
             var data = new TheaterReservationData(m_ApiService.Reservations);
             m_ReservedSeats = data.ReservedSeats;
         }
-        // m_ReservedSeats = new() {
-        //     new() {false, false, false, false, false},
-        //     new() {false, false, false, false, false},
-        //     new() {false, false, true, true, false, false},
-        //     new() {false, false, false, false, true, false},
-        //     new() {false, false, false, false, false, false},
-        //     new() {false, false, true, true, false, false, false, false},
-        //     new() {false, false, false, false, true, false, false, false},
-        //     new() {false, false, false, false, false, false, false, false},
-        //     new() {false, false, true, true, false, false, false, false},
-        //     new() {false, false, false, false, true, false, false, false},
-        //     new() {false, false, false, false, false, false, false, false}
-        // };
     }
 
     private void PopulateView()
     {
         m_Buttons = new();
         m_SeatRows.Clear();
-
-        Debug.Log(m_ReservedSeats);
 
         if (m_ReservedSeats == null) return;
 

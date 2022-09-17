@@ -19,7 +19,6 @@ public class NameDateController
     private DropdownField m_DayDropdown;
 
     private SelectionController m_SelectionController;
-    private string m_ReservationName;
     private int m_CurrentYear;
     private DateTimeFormatInfo m_DateTimeFormat;
 
@@ -32,10 +31,10 @@ public class NameDateController
         m_MonthDropdown = panel.Q<DropdownField>(DateMonthDropdownName);
         m_DayDropdown = panel.Q<DropdownField>(DateDayDropdownName);
 
-        m_ReservationName = m_NameField.value;
+        m_SelectionController.ReservationName = m_NameField.value;
         m_NameField.RegisterCallback<ChangeEvent<string>>(evt => 
         {
-            m_ReservationName = evt.newValue;
+            m_SelectionController.ReservationName = evt.newValue;
         });
 
         m_SelectionController.Date = DateTime.Now.Date;

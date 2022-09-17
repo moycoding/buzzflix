@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.UIElements;
 // TODO: make this an instance of VisualElement, if possible
 public class LinearNavigationController
 {
+    public Action onAction;
 
     private const string navPanelClassName = "nav-panel";
     private const string selectedContentClassName = "selected-content";
@@ -67,12 +69,17 @@ public class LinearNavigationController
         {
             SetCurrentPanel(m_CurrentPanelIndex + 1);
         }
+        else
+        {
+            onAction?.Invoke();
+            SetCurrentPanel(0);
+        }
     }
 
     private void UpdateButtons()
     {
         m_BackButton.visible = m_CurrentPanelIndex > 0;
-        m_NextButton.visible = m_CurrentPanelIndex < m_Panels.Count - 1;
+        m_NextButton.text = m_CurrentPanelIndex < m_Panels.Count - 1 ? "Next" : "Reserve";
     }
 
     private void DisablePanel(int index)

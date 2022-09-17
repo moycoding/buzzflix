@@ -30,6 +30,8 @@ public class UIController : MonoBehaviour
         var contentContainer = root.Q<VisualElement>(navContentName);
         m_NavController = new(root, contentContainer);
 
+        m_NavController.onAction += () => apiService.PostReservation();
+
         m_SelectionController = new();
         apiService.SetSelectionController(m_SelectionController);
 

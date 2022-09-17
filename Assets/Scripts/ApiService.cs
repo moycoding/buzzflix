@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -46,7 +47,6 @@ public class ApiService : MonoBehaviour
 
     public void GetMovies(DateTime date)
     {
-        Debug.Log("Clearing Movies");
         Movies = null;
         StartCoroutine(FetchMovies(date));
     }
@@ -66,7 +66,6 @@ public class ApiService : MonoBehaviour
             else
             {
                 var movies = JsonUtility.FromJson<Movies>(request.downloadHandler.text);
-                Debug.Log("Setting Movies");
                 Movies = movies.data.ConvertAll(m =>
                 {
                     var times = m.times.ConvertAll(t => {
@@ -107,6 +106,43 @@ public class ApiService : MonoBehaviour
 
                 onReservationsUpdated?.Invoke();
             }
+        }
+    }
+
+    public void PostReservation()
+    {
+        if (Movies == null || m_SelectionController.MovieIndex == -1) return;
+        if (m_SelectionController.TimeIndex == -1) return;
+
+        var movie = Movies[m_SelectionController.MovieIndex];
+        var id = movie.id;
+        var timeString = movie.times[m_SelectionController.TimeIndex];
+        var time = DateTime.Parse(timeString);
+        StartCoroutine(PostSeatReservation(id, time, m_SelectionController.Row, m_SelectionController.Seat, m_SelectionController.ReservationName));
+    }
+    private string m_RequestBody;
+    public IEnumerator PostSeatReservation(int movieId, DateTime time, int row, int seat, string name)
+    {
+        var uriBuilder = new UriBuilder("http", "localhost", 5000);
+        uriBuilder.Path = "/reservations";
+        var uri = uriBuilder.Uri;
+        var body = $"{{ \"movie_id\": {movieId}, \"time\": \"{time.ToString("HH:mm:ss")}\", \"row\": {row}, \"seat\": {seat}, \"name\": \"{name}\" }}";
+
+        var request = new UnityWebRequest(uri, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(body);
+        request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SetRequestHeader("Accept", "application/json");
+        yield return request.SendWebRequest();
+        if (request.result == UnityWebRequest.Result.ConnectionError)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            Debug.Log(request.responseCode);
+            Debug.Log(request.downloadHandler.text);
         }
     }
 }
