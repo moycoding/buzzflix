@@ -8,6 +8,9 @@ public class UIController : MonoBehaviour
     [SerializeField]
     VisualTreeAsset movieListEntryTemplate;
 
+    [SerializeField]
+    ApiService apiService;
+
     private const string navContentName = "NavContent";
     private const string nameDatePanelName = "NameDatePanel";
     private const string movieListName = "MovieList";
@@ -28,12 +31,13 @@ public class UIController : MonoBehaviour
         m_NavController = new(root, contentContainer);
 
         m_SelectionController = new();
+        apiService.SetSelectionController(m_SelectionController);
 
         var nameDatePanel = root.Q<VisualElement>(nameDatePanelName);
         m_NameDateController = new(nameDatePanel, m_SelectionController);
 
         var movieList = root.Q<ListView>(movieListName);
-        m_MovieListController = new(movieList, movieListEntryTemplate, m_SelectionController);
+        m_MovieListController = new(movieList, movieListEntryTemplate, m_SelectionController, apiService);
 
         var seatSelectionPanel = root.Q<VisualElement>(seatSelectionPanelName);
         m_SeatSelectionController = new(seatSelectionPanel, m_SelectionController);

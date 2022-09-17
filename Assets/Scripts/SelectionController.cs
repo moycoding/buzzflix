@@ -82,9 +82,9 @@ public class SelectionController
         }
     }
 
-    private DateTime m_Date;
-    private int m_MovieIndex;
-    private int m_TimeIndex;
-    private int m_Row;
-    private int m_Seat;
+    private DateTime m_Date = DateTime.Today;
+    private int m_MovieIndex = -1;
+    private int m_TimeIndex = -1;
+    private int m_Row = -1;
+    private int m_Seat = -1;
 }

@@ -1,14 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-readonly public struct MovieData
+[System.Serializable]
+public struct MovieData
 {
-    public MovieData(string name, List<string> times)
+    public MovieData(int id, string name, List<string> times)
     {
-        this.Name = name;
-        this.Times = times;
+        this.id = id;
+        this.name = name;
+        this.times = times;
     }
 
-    public string Name { get; }
-    public List<string> Times { get; }
+    public int id;
+    public string name;
+    public List<string> times;
 }

@@ -23,14 +23,14 @@ public class MovieListEntryController
 
     public void SetMovieData(MovieData movieData, int selectedIndex, Action<int> onSelect)
     {
-        m_MovieLabel.text = movieData.Name;
+        m_MovieLabel.text = movieData.name;
         m_MovieTimeButtons = new();
         m_MovieTimesContainer.Clear();
 
-        for (int i = 0; i < movieData.Times.Count; i++)
+        for (int i = 0; i < movieData.times.Count; i++)
         {
             var button = new Button();
-            button.text = movieData.Times[i];
+            button.text = movieData.times[i];
             button.AddToClassList(MovieTimeButtonClass);
 
             if (i == selectedIndex)

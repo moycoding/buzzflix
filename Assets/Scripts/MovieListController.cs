@@ -8,14 +8,15 @@ public class MovieListController
 {
     private VisualTreeAsset m_ListEntryTemplate;
     private ListView m_ListView;
-    private List<MovieData> m_MovieData;
 
     private SelectionController m_SelectionController;
+    private ApiService m_ApiService;
     private WeakReference<MovieListEntryController> m_SelectedTimeController = new(null);
 
-    public MovieListController(ListView listView, VisualTreeAsset listEntryTemplate, SelectionController selectionController)
+    public MovieListController(ListView listView, VisualTreeAsset listEntryTemplate, SelectionController selectionController, ApiService apiService)
     {
         m_SelectionController = selectionController;
+        m_ApiService = apiService;
 
         LoadMovieData();
 
@@ -28,17 +29,18 @@ public class MovieListController
         {
             SelectMovieTime(-1, -1, null);
             LoadMovieData();
+        };
+
+        apiService.onMoviesUpdated += () =>
+        {
+            Debug.Log("Data Updated, Populating List");
             PopulateMovieList();
         };
     }
 
     private void LoadMovieData()
     {
-        m_MovieData = new();
-        var movie1Times = new List<string> {"10:30", "1:30", "4:30"};
-        m_MovieData.Add(new("The Origin Story", movie1Times));
-        var movie2Times = new List<string> {"11:00", "1:45", "5:30"};
-        m_MovieData.Add(new("Action Blockbuster Sequel", movie2Times));
+        // call api service
     }
 
     private void PopulateMovieList()
@@ -57,14 +59,14 @@ public class MovieListController
         {
             var controller = item.userData as MovieListEntryController;
             int selectedIndex = (index == m_SelectionController.MovieIndex) ? m_SelectionController.TimeIndex : -1;
-            controller.SetMovieData(m_MovieData[index], selectedIndex, (timeIndex) =>
+            controller.SetMovieData(m_ApiService.Movies[index], selectedIndex, (timeIndex) =>
                 {
                     SelectMovieTime(index, timeIndex, controller);
                 }
             );
         };
 
-        m_ListView.itemsSource = m_MovieData;
+        m_ListView.itemsSource = m_ApiService.Movies;
     }
 
     private void SelectMovieTime(int movieIndex, int timeIndex, MovieListEntryController controller)
