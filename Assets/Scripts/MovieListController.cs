@@ -13,7 +13,11 @@ public class MovieListController
     private ApiService m_ApiService;
     private WeakReference<MovieListEntryController> m_SelectedTimeController = new(null);
 
-    public MovieListController(ListView listView, VisualTreeAsset listEntryTemplate, SelectionController selectionController, ApiService apiService)
+    public MovieListController(
+        ListView listView,
+        VisualTreeAsset listEntryTemplate,
+        SelectionController selectionController,
+        ApiService apiService)
     {
         m_SelectionController = selectionController;
         m_ApiService = apiService;
@@ -33,7 +37,6 @@ public class MovieListController
 
         apiService.onMoviesUpdated += () =>
         {
-            Debug.Log("Data Updated, Populating List");
             PopulateMovieList();
         };
     }
@@ -45,6 +48,7 @@ public class MovieListController
 
     private void PopulateMovieList()
     {
+        Debug.Log("Populating movie list");
         m_ListView.makeItem = () =>
         {
             var newListEntry = m_ListEntryTemplate.Instantiate();
@@ -59,6 +63,7 @@ public class MovieListController
         {
             var controller = item.userData as MovieListEntryController;
             int selectedIndex = (index == m_SelectionController.MovieIndex) ? m_SelectionController.TimeIndex : -1;
+            Debug.Log(m_ApiService.Movies);
             controller.SetMovieData(m_ApiService.Movies[index], selectedIndex, (timeIndex) =>
                 {
                     SelectMovieTime(index, timeIndex, controller);

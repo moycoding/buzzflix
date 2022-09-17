@@ -25,7 +25,6 @@ public class ApiService : MonoBehaviour
     {
         m_SelectionController = selectionController;
         GetMovies(selectionController.Date);
-        Debug.Log(selectionController.Date.ToString());
 
         selectionController.onDateChanged += (date) =>
         {
@@ -47,6 +46,7 @@ public class ApiService : MonoBehaviour
 
     public void GetMovies(DateTime date)
     {
+        Debug.Log("Clearing Movies");
         Movies = null;
         StartCoroutine(FetchMovies(date));
     }
@@ -65,31 +65,26 @@ public class ApiService : MonoBehaviour
             }
             else
             {
-                Debug.Log(request.downloadHandler.text);
                 var movies = JsonUtility.FromJson<Movies>(request.downloadHandler.text);
-                Debug.Log(movies);
-                Debug.Log(movies.data.Count);
+                Debug.Log("Setting Movies");
                 Movies = movies.data.ConvertAll(m =>
                 {
-                    Debug.Log(m.times.Count);
                     var times = m.times.ConvertAll(t => {
                         var time = DateTime.Parse(t);
                         return time.ToString("H:mm");
                     });
                     
-                    Debug.Log(times.Count);
                     return new MovieData(m.id, m.name, times);
                 });
 
                 onMoviesUpdated?.Invoke();
-                Debug.Log(Movies.Count);
             }
         }
     }
 
     public void GetReservations(int movieId, DateTime time)
     {
-        Movies = null;
+        Reservations = null;
         StartCoroutine(FetchReservations(movieId, time));
     }
     public IEnumerator FetchReservations(int movieId, DateTime time)
@@ -107,10 +102,7 @@ public class ApiService : MonoBehaviour
             }
             else
             {
-                Debug.Log(request.downloadHandler.text);
                 var reservations = JsonUtility.FromJson<ReservationWrapper>(request.downloadHandler.text);
-                Debug.Log(reservations);
-                Debug.Log(reservations.data);
                 Reservations = reservations.data;
 
                 onReservationsUpdated?.Invoke();

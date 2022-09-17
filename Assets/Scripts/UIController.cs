@@ -40,6 +40,6 @@ public class UIController : MonoBehaviour
         m_MovieListController = new(movieList, movieListEntryTemplate, m_SelectionController, apiService);
 
         var seatSelectionPanel = root.Q<VisualElement>(seatSelectionPanelName);
-        m_SeatSelectionController = new(seatSelectionPanel, m_SelectionController);
+        m_SeatSelectionController = new(seatSelectionPanel, m_SelectionController, apiService);
     }
 }
